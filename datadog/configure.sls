@@ -30,6 +30,8 @@ datadog_integration_{{ integration }}:
     - user: root
     - group: root
     - mode: 644
+    - context:
+        slspath: {{ slspath  }}
     - require:
       - pkg: datadog_install
       - file: datadog_configure

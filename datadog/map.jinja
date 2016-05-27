@@ -13,6 +13,11 @@ Debian:
     api_key: changeme
     gce_updated_hostname: yes
     use_mount: no
+  integrations
+    couchbase:
+      server: http://localhost:8091
+      username: Administrator
+      password: password
 {%- endload %}
 
 {%- set datadog = salt['grains.filter_by'](datadog_defaults,
