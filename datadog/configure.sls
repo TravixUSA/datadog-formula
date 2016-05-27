@@ -21,7 +21,8 @@ datadog_configure:
     - watch_in:
       - service: datadog_service
 
-{%- for integration in integrations %}
+{%- for integration, options in integrations.iteritems() %}
+  {%- if options.get('enabled') %}
 datadog_integration_{{ integration }}:
   file.managed:
     - name: /etc/dd-agent/conf.d/{{ integration }}.yaml
@@ -37,4 +38,5 @@ datadog_integration_{{ integration }}:
       - file: datadog_configure
     - watch_in:
       - service: datadog_service
+  {%- endif %}
 {%- endfor %}
