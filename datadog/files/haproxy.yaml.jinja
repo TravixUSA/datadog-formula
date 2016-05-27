@@ -1,7 +1,10 @@
+{# This is the couchbase integration template #}
+{%- from slspath + "/map.jinja" import datadog with context %}
+{%- set integrations = datadog.get('integrations', {}) %}
 init_config:
 
 instances:
-  - url: http://localhost/admin?stats
+  - url: {{ integrations.haproxy.url }}
     # username: username
     # password: password
     #
