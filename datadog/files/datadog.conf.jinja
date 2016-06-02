@@ -4,7 +4,7 @@
 {%- set config = datadog.get('config', {}) %}
 
 {%- macro set_parameter(parameter, default=None, comment=False) -%}
-  {%- if value not in config and comment %}
+  {%- if parameter not in config and comment %}
     {%- set comment = '# ' %}
   {%- else %}
     {%- set comment = '' %}
