@@ -28,7 +28,7 @@ datadog_integration_{{ integration }}:
     - name: /etc/dd-agent/conf.d/{{ integration }}.yaml
     - source: salt://{{ slspath }}/files/{{ integration }}.yaml.jinja
     - template: jinja
-    - user: root
+    - user: dd-agent
     - group: root
     - mode: 644
     - context:
