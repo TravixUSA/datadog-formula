@@ -3,10 +3,15 @@
 {%- set processed_parameters = [] %}
 {%- set config = datadog.get('config', {}) %}
 
-{%- macro set_parameter(parameter, default=None) -%}
+{%- macro set_parameter(parameter, default=None, comment=False) -%}
+  {%- if value not in config and comment %}
+    {%- set comment = '# ' %}
+  {%- else %}
+    {%- set comment = '' %}
+  {%- endif %}
   {%- set value = config.get(parameter, default) %}
   {%- if value is not none %}
-{{ parameter }}: {{ value }}
+{{ comment }}{{ parameter }}: {{ value }}
     {%- do processed_parameters.append(parameter) %}
   {%- endif %}
 {%- endmacro %}
@@ -84,7 +89,7 @@ tags: {{ tags|join(',') }}
 {{ set_parameter('listen_port', '17123') }}
 
 # Start a graphite listener on this port
-{{ set_parameter('graphite_listen_port', '17124') }}
+{{ set_parameter('graphite_listen_port', '17124', True) }}
 
 # Additional directory to look for Datadog checks
 {{ set_parameter('additional_checksd', '/etc/dd-agent/checks.d/') }}
