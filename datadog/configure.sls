@@ -11,7 +11,7 @@ datadog_configure:
     - name: /etc/dd-agent/datadog.conf
     - source: salt://{{ slspath }}/files/datadog.conf.jinja
     - template: jinja
-    - user: root
+    - user: dd-agent
     - group: root
     - mode: 644
     - context:
