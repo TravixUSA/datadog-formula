@@ -19,7 +19,9 @@
 {%- set tags = [] -%}
 {%- if 'roles' in grains -%}
   {%- for role in salt['grains.get']('roles', []) -%}
-    {%- do tags.append('role:' ~ role) -%}
+    {%- if role != 'datadog' %}
+      {%- do tags.append('role:' ~ role) -%}
+    {%- endif %}
   {%- endfor -%}
 {%- endif -%}
 {%- for tag in ['environment', 'cloud', 'platform', 'region', 'cluster'] -%}
