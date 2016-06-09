@@ -1,5 +1,5 @@
 include:
-{%- if salt[grains.get]('os','linux') == 'linux' %}
+{%- if salt['grains.get']('os','linux') == 'linux' %}
   - .repo
 {%- endif %}
   - .install
