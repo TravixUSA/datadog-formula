@@ -8,7 +8,7 @@ include:
 
 datadog_configure:
   file.managed:
-    - name: /etc/dd-agent/datadog.conf
+    - name: {{ datadog.config_dir }}/datadog.conf
     - source: salt://{{ slspath }}/files/datadog.conf.jinja
     - template: jinja
     - user: dd-agent
@@ -25,7 +25,7 @@ datadog_configure:
   {%- if options.get('enabled') %}
 datadog_integration_{{ integration }}:
   file.managed:
-    - name: /etc/dd-agent/conf.d/{{ integration }}.yaml
+    - name: {{ datadog.config_dir }}/conf.d/{{ integration }}.yaml
     - source: salt://{{ slspath }}/files/{{ integration }}.yaml.jinja
     - template: jinja
     - user: dd-agent

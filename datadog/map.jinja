@@ -2,6 +2,7 @@
 Debian:
   pkg: datadog-agent
   service: datadog-agent
+  config_dir: /etc/datadog
   repo:
     name: deb http://apt.datadoghq.com/ stable main
     file: /etc/apt/sources.list.d/datadog.list
@@ -20,6 +21,15 @@ Debian:
       server: http://localhost:8091
       username: Administrator
       password: password
+Windows:
+  pkg: datadog
+  service: DataDog
+  config_dir: C:/ProgramData/Datadog
+  config:
+    dd_url: https://app.datadoghq.com
+    api_key: changeme
+    gce_updated_hostname: yes
+    use_mount: no
 {%- endload %}
 
 {%- set datadog = salt['grains.filter_by'](datadog_defaults,
