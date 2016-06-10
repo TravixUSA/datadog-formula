@@ -11,8 +11,10 @@ datadog_configure:
     - name: {{ datadog.config_dir }}/datadog.conf
     - source: salt://{{ slspath }}/files/datadog.conf.jinja
     - template: jinja
+{%- if salt['grains.get']('os','linux') == 'linux' %}
     - user: dd-agent
     - group: root
+{%- endif %}
     - mode: 644
     - context:
         slspath: {{ slspath  }}
@@ -28,8 +30,10 @@ datadog_integration_{{ integration }}:
     - name: {{ datadog.config_dir }}/conf.d/{{ integration }}.yaml
     - source: salt://{{ slspath }}/files/{{ integration }}.yaml.jinja
     - template: jinja
+{%- if salt['grains.get']('os','linux') == 'linux' %}
     - user: dd-agent
     - group: root
+{%- endif %}
     - mode: 644
     - context:
         slspath: {{ slspath  }}
