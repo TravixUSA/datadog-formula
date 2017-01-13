@@ -1,5 +1,5 @@
 {%- from slspath + "/map.jinja" import datadog with context %}
-{%- if salt['grains.get']('os_family','linux') == 'linux' %}
+{%- if salt['grains.get']('os_family','') == 'Debian' %}
 datadog_repo_purge:
   pkgrepo.absent:
     - humanname: {{ datadog.repo.human_name }}
