@@ -1,7 +1,11 @@
 include:
-{%- if salt['grains.get']('os','linux') == 'linux' %}
+{%- if not 'datadog' in salt['grains.get']('roles',[]) %}
+  - .purge
+{% else %}
+  {%- if salt['grains.get']('os','linux') == 'linux' %}
   - .repo
-{%- endif %}
+  {%- endif %}
   - .install
   - .service
   - .configure
+{%- endif %}
